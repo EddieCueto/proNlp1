@@ -45,7 +45,7 @@ for i in range(k):
     # select only data observations with cluster label == i
     ds = J[np.where(labels == i)]
     # plot the data observations
-    pyplot.plot(ds[:,0],ds[:,1],'o')
+    pyplot.plot(ds[:, 0], ds[:, 1], 'o')
     # plot the centroids
     lines = pyplot.plot(centroids[i, 0], centroids[i, 1], 'kx')
     # make the centroid x's bigger
