@@ -1,26 +1,32 @@
-import yaml
+def get_vect():
 
-rawDat = open('rss_univ.txt', 'r')
+    import yaml
 
-strDat = rawDat.read()
+    rawDat = open('rss_univ.txt', 'r')
 
-rawDat = strDat.split(';\n')
+    strDat = rawDat.read()
 
-index = len(rawDat) - 1
-rawDat.pop(index)
+    rawDat = strDat.split(';\n')
 
-strDat = []
+    index = len(rawDat) - 1
+    rawDat.pop(index)
 
-for i in rawDat:
-    strDat.append(yaml.load(i))
+    strDat = []
 
-del rawDat
+    for i in rawDat:
+        strDat.append(yaml.load(i))
 
-impDat = []
-for d in strDat:
-    impDat.append([d['entries'][0]['title'], d['entries'][0]['links'][0]['href'], d['entries'][0]['summary']])
+    del rawDat
 
-del strDat
+    impDat = []
+    for d in strDat:
+        impDat.append([d['entries'][0]['title'], d['entries'][0]['links'][0]['href'], d['entries'][0]['summary']])
+
+    del strDat
+
+    return impDat
+
+
 
 # this section of the code show how to extract relevant data from the dictionaries
 """
