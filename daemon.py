@@ -22,8 +22,9 @@ class Daemon(Thread):
 
     def run(self):
         while True:
-            if str(strftime("%H:%M:%S", gmtime())) == '05:00:00':
+            if str(strftime("%H:%M:%S", gmtime())) == ('12:00:00' or '24:00:00'):
                 get_data_rss()
+                print('Data capture finished at time' + str(strftime("%H:%M:%S", gmtime())))
 
 
 def main_fct():
