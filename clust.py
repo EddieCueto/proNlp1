@@ -28,4 +28,18 @@ del dataVect, stop_words, vectorizer  # , corpus
 
 J = X.toarray()
 
-print(J)
+# print(J)
+
+index = []
+
+for x in range(0, len(J)):
+    if sum(J[x]) != 0:
+        index.append(x)
+
+index = tuple(index)
+
+electCorp = [corpus[x] for x in index]
+
+del corpus
+
+print(electCorp)
