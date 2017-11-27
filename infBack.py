@@ -27,6 +27,8 @@ def get_vect():
     return impDat
 
 
+# print(len(get_vect()))
+
 
 # this section of the code show how to extract relevant data from the dictionaries
 """
