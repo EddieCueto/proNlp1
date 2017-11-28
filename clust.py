@@ -1,45 +1,49 @@
 from infBack import get_vect as gv
 from sklearn.feature_extraction.text import TfidfVectorizer
+from stopWords import stopWrdList
 import numpy as np
 
 
-def stopWrdList():
-    sw = open('stop.words')
-    prue = []
-    prue.append(sw.readlines())
-    return [l.strip('\n\r') for l in prue[0]]
+def clustering():
 
+    # This are the relevant news cue words
+    voc = ["ine", "pri", "pan", "prd", "pt", "pvem", "verde", "movimiento", "ciudadano", "panal", "alianza", "morena", "partido", "encuentro", "social", "electoral"]
 
-voc = ["ine", "pri", "pan", "prd", "pt", "pvem", "verde", "movimiento", "ciudadano", "panal", "alianza", "morena", "partido", "encuentro", "social", "electoral"]
+    stop_words = stopWrdList()
 
-stop_words = stopWrdList()
+    dataVect = gv()
 
-dataVect = gv()
+    dataVect = np.array(dataVect)
 
-dataVect = np.array(dataVect)
+    corpus = dataVect[:, 2]
 
-corpus = dataVect[:, 2]
+    vectorizer = TfidfVectorizer(strip_accents='ascii', analyzer='word', stop_words=stop_words, vocabulary=voc)
 
-vectorizer = TfidfVectorizer(strip_accents='ascii', analyzer='word', stop_words=stop_words, vocabulary=voc)
+    X = vectorizer.fit_transform(corpus)
 
-X = vectorizer.fit_transform(corpus)
+    del dataVect, stop_words, vectorizer  # , corpus
 
-del dataVect, stop_words, vectorizer  # , corpus
+    J = X.toarray()
 
-J = X.toarray()
+    # The indexes are extracted to obtain only the relevant news from the general corpus
 
-# print(J)
+    index = []
 
-index = []
+    for x in range(0, len(J)):
+        if sum(J[x]) != 0:
+            index.append(x)
 
-for x in range(0, len(J)):
-    if sum(J[x]) != 0:
-        index.append(x)
+    index = tuple(index)
 
-index = tuple(index)
+    electCorp = [corpus[x] for x in index]
 
-electCorp = [corpus[x] for x in index]
+    del corpus
 
-del corpus
+    # This section of the code processes the political party news in order to give a emotional classification
 
-print(electCorp)
+    temp = []
+
+    for i in electCorp:
+        temp.append(i.split(' '))
+
+    return temp
