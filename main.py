@@ -1,19 +1,8 @@
 
-from retEmoDict import emoDic
-from newsTrain import classifyNews
-from clust import clustering
+from newsTrain import trainVect, flagger
 
 
-temp = clustering()
+sert = trainVect()
 
-emoDict = emoDic()
-
-rest = []
-
-for i in temp:
-    rest.append(classifyNews(i, emoDict))
-
-
-for i in rest:
+for i in sert:
     print(i)
-
