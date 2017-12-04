@@ -1,8 +1,8 @@
 
-from newsTrain import trainVect, flagger
+from newsTrain import saveTraining
+from classify_news import classify_news
 
+# saveTraining()
 
-sert = trainVect()
-
-for i in sert:
-    print(i)
+classify_news('news_to_classify.txt')
+classify_news('news2.txt')

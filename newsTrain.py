@@ -2,7 +2,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from stopWords import stopWrdList
 from retEmoDict import emoDic
 from clust import clustering
-import operator
 
 def trainPre(word_array, dict):
 
@@ -178,7 +177,7 @@ def trainVect():
 
     stop_words = stopWrdList()
 
-    vectorizer = TfidfVectorizer(strip_accents='ascii', analyzer='word', stop_words=stop_words)
+    vectorizer = TfidfVectorizer(strip_accents='ascii', analyzer='word', stop_words=stop_words, max_features=100)
 
     X = vectorizer.fit_transform(corpus)
     vector = X.toarray()
@@ -237,6 +236,8 @@ def trainVect():
         neut_neg_vect = [vector[x] for x in neut_neg_ind]
         neut_pos_vect = [vector[x] for x in neut_pos_ind]
 
+############################################  1
+
     len1 = len(part_neu_vect)
     if len1 != 0:
         for a in range(len1):
@@ -251,17 +252,23 @@ def trainVect():
     else:
         part_neu_vect = []
 
+############################################  2
+
     len1 = len(part_neg_vect)
     if len1 != 0:
         for a in range(len1):
             tmp = part_neg_vect[0]
-            tmp = operate_on_Narray(part_neg_vect[0], tmp[a + 1], lambda x, y: x + y)
+            tmp = operate_on_Narray(part_neg_vect[0], tmp[a+1], lambda x, y: x + y)
 
-        tmp = operate_on_Narray(part_neg_vect[0], tmp[a + 1], lambda x, y: x / len1)
+        tmp = operate_on_Narray(part_neg_vect[0], tmp[a+1], lambda x, y: x / len1)
+
         part_neg_vect = list(tmp)
+
 
     else:
         part_neg_vect = []
+
+############################################  3
 
     len1 = len(part_pos_vect)
     if len1 != 0:
@@ -275,6 +282,8 @@ def trainVect():
     else:
         part_pos_vect = []
 
+############################################  4
+
     len1 = len(cont_neu_vect)
     if len1 != 0:
         for a in range(len1):
@@ -286,6 +295,8 @@ def trainVect():
 
     else:
         cont_neu_vect = []
+
+############################################  5
 
     len1 = len(cont_neg_vect)
     if len1 != 0:
@@ -299,6 +310,8 @@ def trainVect():
     else:
         cont_neg_vect = []
 
+############################################  6
+
     len1 = len(cont_pos_vect)
     if len1 != 0:
         for a in range(len1):
@@ -310,6 +323,22 @@ def trainVect():
 
     else:
         cont_pos_vect = []
+
+############################################  7
+
+    len1 = len(neut_neu_vect)
+    if len1 != 0:
+        for a in range(len1):
+            tmp = neut_neu_vect[0]
+            tmp = operate_on_Narray(neut_neu_vect[0], tmp[a + 1], lambda x, y: x + y)
+
+        tmp = operate_on_Narray(neut_neu_vect[0], tmp[a + 1], lambda x, y: x / len1)
+        neut_neu_vect = list(tmp)
+
+    else:
+        neut_neu_vect = []
+
+############################################  8
 
     len1 = len(neut_neg_vect)
     if len1 != 0:
@@ -323,6 +352,8 @@ def trainVect():
 
     else:
         neut_neg_vect = []
+
+############################################  9
 
     len1 = len(neut_pos_vect)
     if len1 != 0:
@@ -341,3 +372,12 @@ def trainVect():
 
     return [part_neu_vect, part_neg_vect, part_pos_vect, cont_neu_vect, cont_neg_vect, cont_pos_vect, neut_neu_vect, neut_neg_vect, neut_pos_vect]
 
+
+
+def saveTraining():
+
+    sert = trainVect()
+    trnVect = open('trn_vect.vec', 'w')
+
+    for i in sert:
+        trnVect.write(str(i) + '\n')
