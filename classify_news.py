@@ -71,9 +71,9 @@ def classify_news(document):
     cont_neu_vect = 'This note has neutral emotions and it is related with the opposition'
     cont_neg_vect = 'This note has negative emotions and it is related with the opposition'
     cont_pos_vect = 'This note has positive emotions and it is related with the opposition'
-    neut_neu_vect = 'This note has neutral emotions and it is not particularly related a political party'
-    neut_neg_vect = 'This note has negative emotions and it is not particularly related a political party'
-    neut_pos_vect = 'This note has positive emotions and it is not particularly related a political party'
+    neut_neu_vect = 'This note has neutral emotions and it is not particularly related to a political party'
+    neut_neg_vect = 'This note has negative emotions and it is not particularly related to a political party'
+    neut_pos_vect = 'This note has positive emotions and it is not particularly related to a political party'
 
     results = [part_neu_vect, part_neg_vect, part_pos_vect, cont_neu_vect, cont_neg_vect, cont_pos_vect, neut_neu_vect, neut_neg_vect, neut_pos_vect]
 

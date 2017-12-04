@@ -1,5 +1,5 @@
 
-from newsTrain import saveTraining
+# from newsTrain import saveTraining
 from classify_news import classify_news
 
 # saveTraining()

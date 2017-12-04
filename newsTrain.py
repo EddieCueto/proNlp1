@@ -148,7 +148,6 @@ def flagger():
             index.append(3)
 
 
-
     lenFlag = len(flag)
     lenInde = len(index)
 
